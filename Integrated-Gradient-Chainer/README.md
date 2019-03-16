@@ -9,11 +9,23 @@ This is the chainer implementation of ["Axiomatic Attribution for Deep Networks"
 - opencv-python
 ## Instructions
 
-### The library support all networks which are implemented in Chainer (of course, you can add any networks by yourself)
-### Run the code
-```bash
-python main.py --model= vgg16  --image= 01.jpg
+### The library support networks which are implemented in Chainer:
+(of course, you can add any networks by yourself)
+1. VGG16Layers - named: vgg16
+2. VGG19Layers - named: vgg19
+3. GoogLeNet - named: googlenet
+4. ResNet50Layers - named: resnet50
+5. ResNet101Layers - named: resnet101
+6. ResNet152Layers - named: resnet152
 
+### Run the code
+Template:
+```bash
+python main.py --model [model_name]  --image= [image_name]
+```
+Example:
+```bash
+python main.py --model vgg16 --image 01.jpg
 ```
 ## Results
 Results are slightly different from the original paper.
