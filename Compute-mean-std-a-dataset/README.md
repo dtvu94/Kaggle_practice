@@ -12,5 +12,6 @@ Dataset link: https://www.microsoft.com/en-us/download/details.aspx?id=54765
 - OpenCV-Python
 
 ## Instruction
-``bash
+```bash
 python compute_mean_std_img_dataset.py
+```
