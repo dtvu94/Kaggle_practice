@@ -47,32 +47,32 @@ def read_input_image(image_name, dir_path):
         img = cv2.imread(image_path)
         # change to RGB color order
         img = img[:, :, (2, 1, 0)]
-        print('Image shape after read: {}'.format(img.shape))
         return img
     raise ValueError("Cannot read image at path: " + image_path)
 
-def get_predict_and_gradient(img, model, label_idx):
-    print('input image shape: {}'.format(img.shape))
+def get_predict_and_gradient(img, model, label_pred):
     y = model(img)
     input = chainer.Variable(img)
     prob = model(input)['prob']
-    if label_idx is None:
+    # calculate label index - label prediction
+    if label_pred is None:
         y = y['prob'].array
-        label_idx = y.argmax(axis=1)[0]
-    # clear grad
+        label_pred = y.argmax(axis=1)[0]
+    # calculate grad
     gradient = chainer.grad([prob], [input])
-    gradients = np.array(gradient)
-    return label_idx, gradients
+    # get gradient array
+    gradient = gradient[0].array
+    return label_pred, gradient
 
-def pre_processing(img, mean, std):
+def normalize_and_change_shape(img, mean, std):
     #mean = np.array([0.485, 0.456, 0.406]).reshape([1, 1, 3])
     #std = np.array([0.229, 0.224, 0.225]).reshape([1, 1, 3])
     img = img / 255
     img = (img - mean) / std
+    # change to suitable format for chainer (1, 3, x, y)
     img = np.transpose(img, (2, 0, 1))
     img = np.expand_dims(img, 0)
-    img = np.float32(img)
-    print('Image shape after pre-process: {}'.format(img.shape))
+    img = np.array(np.float32(img))
     return img
 
 # generate the entire images

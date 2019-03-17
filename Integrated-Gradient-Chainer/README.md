@@ -7,6 +7,7 @@ This is the chainer implementation of ["Axiomatic Attribution for Deep Networks"
 - python-3.6
 - chainer-5.3.0
 - opencv-python
+- imageio
 ## Instructions
 
 ### The library support networks which are implemented in Chainer:
