@@ -50,23 +50,32 @@ def read_input_image(image_name, dir_path):
         return img
     raise ValueError("Cannot read image at path: " + image_path)
 
-def get_predict_and_gradient(img, model, label_pred):
-    y = model(img)
-    input = chainer.Variable(img)
-    prob = model(input)['prob']
-    # calculate label index - label prediction
-    if label_pred is None:
-        y = y['prob'].array
-        label_pred = y.argmax(axis=1)[0]
-    # calculate grad
-    gradient = chainer.grad([prob], [input])
-    # get gradient array
-    gradient = gradient[0].array
-    return label_pred, gradient
+def get_predict_and_gradients(inputs, model, label_pred, mean, std):
+    gradients = []
+    for i, input in enumerate(inputs):
+        img = normalize_and_change_shape(input, mean, std)
+        y = model(img)
+        var_img = chainer.Variable(img)
+        prob = model(var_img)['prob']
+        # calculate label index - label prediction
+        if label_pred is None:
+            y = y['prob'].array
+            label_pred = y.argmax(axis=1)[0]
+        # calculate grad
+        prob = prob[:, label_pred]
+        gradient = chainer.grad([prob], [var_img])
+        # get gradient array
+        gradient = gradient[0].array
+        gradients.append(gradient)
+        print('Done step {}'.format(i))
+    gradients = np.array(gradients)
+    return label_pred, gradients
 
-def normalize_and_change_shape(img, mean, std):
-    #mean = np.array([0.485, 0.456, 0.406]).reshape([1, 1, 3])
-    #std = np.array([0.229, 0.224, 0.225]).reshape([1, 1, 3])
+def normalize_and_change_shape(img, 
+                                mean=[0.485, 0.456, 0.406], 
+                                std=[0.229, 0.224, 0.225]):
+    mean = np.array(mean).reshape([1, 1, 3])
+    std = np.array(std).reshape([1, 1, 3])
     img = img / 255
     img = (img - mean) / std
     # change to suitable format for chainer (1, 3, x, y)
@@ -75,13 +84,3 @@ def normalize_and_change_shape(img, mean, std):
     img = np.array(np.float32(img))
     return img
 
-# generate the entire images
-def generate_entrie_images(img_origin, img_grad, img_grad_overlay, img_integrad, img_integrad_overlay):
-    blank = np.ones((img_grad.shape[0], 10, 3), dtype=np.uint8) * 255
-    blank_hor = np.ones((10, 20 + img_grad.shape[0] * 3, 3), dtype=np.uint8) * 255
-    upper = np.concatenate([img_origin[:, :, (2, 1, 0)], blank, img_grad_overlay, blank, img_grad], 1)
-    down = np.concatenate([img_origin[:, :, (2, 1, 0)], blank, img_integrad_overlay, blank, img_integrad], 1)
-    total = np.concatenate([upper, blank_hor, down], 0)
-    total = cv2.resize(total, (550, 364))
-
-    return total

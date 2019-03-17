@@ -132,7 +132,7 @@ def binarize(attributions, threshold=0.001):
     return attributions > threshold
 
 
-def morphological_cleanup(attributions, structure=np.ones((4,4))):
+def morphological_cleanup_func(attributions, structure=np.ones((4,4))):
     closed = ndimage.grey_closing(attributions, structure=structure)
     opened = ndimage.grey_opening(closed, structure=structure)
     return opened
@@ -261,7 +261,7 @@ def visualize(attributions,
                                     plot_distribution=plot_distribution)
   
     if morphological_cleanup:
-        attributions = morphological_cleanup(attributions, structure=structure)
+        attributions = morphological_cleanup_func(attributions, structure=structure)
     if outlines:
         attributions = outlines_func(attributions,
                                 percentage=outlines_percent,

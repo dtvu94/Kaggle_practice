@@ -6,9 +6,7 @@ import argparse
 import os
 from os.path import join, abspath, dirname, exists
 
-from utils import get_predict_and_gradient
-from utils import generate_entrie_images
-from utils import normalize_and_change_shape
+from utils import get_predict_and_gradients
 from utils import create_model
 from utils import read_input_image
 
@@ -43,37 +41,57 @@ if __name__ == '__main__':
     model = create_model(args.model)
     # read the image
     img = read_input_image(args.image, IMAGE_DIR)
-    
+    print('image shape after read: {}'.format(img.shape))
     # mean and standard deviation
     mean = np.array([0.485, 0.456, 0.406]).reshape([1, 1, 3])
     std = np.array([0.229, 0.224, 0.225]).reshape([1, 1, 3])
     
-    normalized_img = normalize_and_change_shape(img, mean, std)
-    
     # prepare variables for calculating integrated gradient
     steps = 50
     num_random_trials = 10
-    clip_above_percentile = 99
-    clip_below_percentile = 0
-    overlay = True
-    outline = True
     
     # calculate the gradient and the label index
-    label_pred, gradients = get_predict_and_gradient(normalized_img, model, None)
+    label_pred, gradients = get_predict_and_gradients([img], model, None, mean, std)
     print('label: {}'.format(label_pred))
-    
+    """
     # calculae the integrated gradients 
     attributions = random_baseline_integrated_gradients(
-                        normalized_img, 
+                        img, 
                         model, 
                         label_pred, 
-                        get_predict_and_gradient,
+                        get_predict_and_gradients,
                         steps, 
-                        num_random_trials
-                        )
+                        num_random_trials,
+                        mean, 
+                        std)
     np.save('attributions.npy', attributions)
+    """
+    
+    attributions = np.load('attributions.npy')
     print('attributions shape: {}'.format(attributions.shape))
+    print('img shape: {}'.format(img.shape))
+    
+    img_integrated_gradient_overlay = visualize(attributions, 
+                                                img, 
+                                                clip_above_percentile=99, 
+                                                clip_below_percentile=0,
+                                                outlines=True,
+                                                overlay=True)
+    
+    img_integrated_gradient = visualize(attributions, 
+                                        img, 
+                                        clip_above_percentile=99, 
+                                        clip_below_percentile=0, 
+                                        overlay=False)
+    
+    img_integrated_gradient_overlay = np.uint8(img_integrated_gradient_overlay)
+    img_integrated_gradient = np.uint8(img_integrated_gradient)
+    imageio.imwrite('./results/img_integrated_gradient_overlay.png', img_integrated_gradient_overlay)
+    imageio.imwrite('./results/img_integrated_gradient.png', img_integrated_gradient)
+    
+    
     #print('attributions: {}'.format(attributions))
+    """
     ig_overlay_outline = visualize(attributions, 
                                             img, 
                                             overlay=overlay, 
@@ -88,4 +106,4 @@ if __name__ == '__main__':
     ig = ig.astype(np.uint8)
     imageio.imwrite('ig_overlay_outline.png', ig_overlay_outline)
     imageio.imwrite('ig.png', ig)
-    
+    """
