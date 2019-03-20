@@ -15,3 +15,6 @@ Dataset link: https://www.microsoft.com/en-us/download/details.aspx?id=54765
 ```bash
 python compute_mean_std_img_dataset.py
 ```
+
+## This project is a solution for an issue:
+- Need to compute mean and standard deviation of an image dataset.
