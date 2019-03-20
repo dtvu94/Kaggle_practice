@@ -73,15 +73,14 @@ if __name__ == '__main__':
     
     img_integrated_gradient_overlay = visualize(attributions, 
                                                 img, 
-                                                clip_above_percentile=99, 
-                                                clip_below_percentile=0,
-                                                outlines=True,
+                                                clip_above_percentile=95, 
+                                                clip_below_percentile=58,
                                                 overlay=True)
     
     img_integrated_gradient = visualize(attributions, 
                                         img, 
-                                        clip_above_percentile=99, 
-                                        clip_below_percentile=0, 
+                                        clip_above_percentile=95, 
+                                        clip_below_percentile=58, 
                                         overlay=False)
     
     img_integrated_gradient_overlay = np.uint8(img_integrated_gradient_overlay)
