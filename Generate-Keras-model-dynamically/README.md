@@ -45,40 +45,98 @@ Each part is saved as the dictionary format in python.
 Note: This module allows **ASCII** characters only. In case of unicode, you have to fix the IO part by yourself.
 
 ### Info
-This part contains information for creating files with many status, conditions. The list below describes each key and its role in the part.
-
-1. File_path: an absolute path of the file point to a location where it is saved to.
-    For examples:
-    - E:\GitProjects\Machine_Learning_practice\Generate-Keras-model-dynamically\one.py
-    - E:\GitProjects\Machine_Learning_practice\Generate-Keras-model-dynamically\two.py
-2. Write_mode: can be append or write mode, intend to combine with existed sources.
-    For examples: "a", "w"
-3. Keras_mode: sequential or function type in creating model
-4. Function_name: the name of the function which create the required model
-    For examples:
-    - Function name: "MyModel" 
-    => result: def MyModel():
-5. Comment_mode: a flag to turn on/off writing comments to the creating model function
-    For examples: "True"/"Yes", "False"/"No"
+Information:
+    Store information of the creating process
+Syntax:
+    a)  File_path: an absolute path of the creating Keras model file.
+    b)  Write_mode: can be append or write mode, intend to combine with 
+    existed sources. 
+        For examples: "a", "w"
+    c)  Function_name: the name of the function which create the 
+    required model.
+        For examples:
+            Function name: "MyModel" => result: def MyModel():
+    d)  Comment_mode: a flag to turn on/off writing comments to the 
+    creating model function.
+        For examples: "True"/"Yes", "False"/"No"
 
 ### Parameters
-
+Information:
+    Contains all input parameters for the model function and their
+    descriptions.
+Syntax:
+    a)  All keys' characters must be in CAPITAL letter.
+        For examples: "MIN_X", "KERNEL_SIZE_1", "POOL_2_2", ...
+    b)  All values must be in string type.
+        For examples: "(2, 2)", "3", "Conv1D", ...
 
 ### Variables
-
+Information:
+    Contains all local variables for the model function and their
+    descriptions.
+Syntax:
+    a)  All keys' characters must be in CAPITAL letter
+        For examples: "MIN_X", "KERNEL_SIZE_1", "POOL_2_2", ...
+    b)  All values must be in string type
+        For examples: "(2, 2)", "3", "Conv1D", ...
 
 ### Layer definitions
-
+Information:
+    Contains layers' definitions such as Convolution, flatten, ...
+    Key is the layer exact name.
+    Value is the layer input parameters
+Syntax:
+    a)  Layer's key can be anything, depend on your hobbies;
+        For examples: "1", "2", "conv1", "conv2", "conv3", "conv4", ...
+    b)  The attribute key: "Layer" must be written correctly.
+    c)  Other attributes' keys of one layer must be written the same as 
+    the API in Keras.
+        For intance: "filters" key of layer "Conv1D"
+    d)  The template: [VARIABLE_NAME] is used for assigning a value in
+    "variables" part to the attribute value of this part.
+        For examples: "Layer": "Con1", "kernel_size": "SIZE_3", ... 
 
 ### Layer connections
-
+Information:
+    The place includes all connections between layers to form a network
+Syntax:
+    a)  Template for connection:
+        [NAME_CONNECT] = ARRAY OF [LAYER_DEFINITION_KEY_NAME] 
+                                or [PREVIOUS_DEFINE_CONNECTION]
+    b)  The special case for the input:
+            [NAME_CONNECT] = ARRAY OF [INPUT_LAYER_KEY_NAME]
 
 ### Model
-
+Information:
+    Contains all input parameters for the model constructor function.
+Syntax:
+    a)  "inputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or 
+    an array of [LAYER_DEFINITION_KEY_NAME]
+    b)  "outputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] 
+    or an array of [LAYER_DEFINITION_KEY_NAME]
 
 ### Compile
-
+Information:
+    Contains all input parameters for the model compile function.
+Syntax:
+    a)  Attributes' keys of one layer must be written the same as the
+    API in Keras.
+    b)  Attributes's values can has the template for functions in 
+    "functions_definition" part
+        For examples: 
+            "loss": "[VAE_LOSS]"
+            "optimizer": "[MYOPTIMIZE]", ...
 
 ### Additional functions
-
+Information:
+    Implement additional functions in the model file. 
+    Key of an element is a symbol name to search if it is used in 
+        Layers_structure/Model/Compile
+    Value of an element is the content of the function which is created
+        by a convert function.
+Syntax:
+    a)  All keys' characters must be in CAPITAL letter
+    b)  All values must be absolutely the same as the content from the
+    function:
+        convert_py_func_to_txt
 
