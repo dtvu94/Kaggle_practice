@@ -110,8 +110,8 @@ Syntax:
 - Attributes' keys of one layer must be written the same as the API in Keras.
 - Attributes's values can has the template for functions in "functions_definition" part
     - For examples: 
-        ```bash "loss": "[VAE_LOSS]"
-         "optimizer": "[MYOPTIMIZE]", ...```
+        ```bash "loss": "[VAE_LOSS]"```
+        ```bash "optimizer": "[MYOPTIMIZE]", ...```
 
 ### Additional functions
 Information:
@@ -121,4 +121,4 @@ Information:
 Syntax:
 - All keys' characters must be in CAPITAL letter
 - All values must be absolutely the same as the content from the function:
-    ```convert_py_func_to_txt```
+    ```bash convert_py_func_to_txt```
