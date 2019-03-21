@@ -91,12 +91,13 @@ Syntax:
 
 ### Layer connections
 Information:
+
     - The place includes all connections between layers to form a network
 Syntax:
     - Template for connection:
-        ```[NAME_CONNECT] = ARRAY OF [LAYER_DEFINITION_KEY_NAME] or [PREVIOUS_DEFINE_CONNECTION]```
+        [NAME_CONNECT] = ARRAY OF [LAYER_DEFINITION_KEY_NAME] or [PREVIOUS_DEFINE_CONNECTION]
     - The special case for the input:
-        ```[NAME_CONNECT] = ARRAY OF [INPUT_LAYER_KEY_NAME]```
+        [NAME_CONNECT] = ARRAY OF [INPUT_LAYER_KEY_NAME]
 
 ### Model
 Information:
@@ -112,8 +113,10 @@ Syntax:
     - Attributes' keys of one layer must be written the same as the API in Keras.
     - Attributes's values can has the template for functions in "functions_definition" part
         - For examples: 
-            ```"loss": "[VAE_LOSS]"
-            "optimizer": "[MYOPTIMIZE]", ...```
+        
+            "loss": "[VAE_LOSS]"
+            
+            "optimizer": "[MYOPTIMIZE]", ...
 
 ### Additional functions
 Information:
