@@ -118,5 +118,4 @@ Information:
 - Value of an element is the content of the function which is created by a convert function.
 Syntax:
 - All keys' characters must be in CAPITAL letter
-- All values must be absolutely the same as the content from the function:
-    ```bash convert_py_func_to_txt```
+- All values must be absolutely the same as the content from the function: ```convert_py_func_to_txt```
