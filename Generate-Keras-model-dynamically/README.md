@@ -46,7 +46,7 @@ Note: This module allows **ASCII** characters only. In case of unicode, you have
 
 ### Info
 Information:
-    Store information of the creating process
+- Store information of the creating process
 Syntax:
     a)  File_path: an absolute path of the creating Keras model file.
     b)  Write_mode: can be append or write mode, intend to combine with 
