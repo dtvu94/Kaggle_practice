@@ -98,29 +98,27 @@ Syntax:
 
 ### Model
 Information:
-    - Contains all input parameters for the model constructor function.
+- Contains all input parameters for the model constructor function.
 Syntax:
-    - "inputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or an array of [LAYER_DEFINITION_KEY_NAME]
-    - "outputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or an array of [LAYER_DEFINITION_KEY_NAME]
+- "inputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or an array of [LAYER_DEFINITION_KEY_NAME]
+- "outputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or an array of [LAYER_DEFINITION_KEY_NAME]
 
 ### Compile
 Information:
-    - Contains all input parameters for the model compile function.
+- Contains all input parameters for the model compile function.
 Syntax:
-    - Attributes' keys of one layer must be written the same as the API in Keras.
-    - Attributes's values can has the template for functions in "functions_definition" part
-        - For examples: 
-        
-            "loss": "[VAE_LOSS]"
-            
-            "optimizer": "[MYOPTIMIZE]", ...
+- Attributes' keys of one layer must be written the same as the API in Keras.
+- Attributes's values can has the template for functions in "functions_definition" part
+    - For examples: 
+        ```bash "loss": "[VAE_LOSS]"
+         "optimizer": "[MYOPTIMIZE]", ...```
 
 ### Additional functions
 Information:
-    - Implement additional functions in the model file. 
-    - Key of an element is a symbol name to search if it is used in Layers_structure/Model/Compile
-    - Value of an element is the content of the function which is created by a convert function.
+- Implement additional functions in the model file. 
+- Key of an element is a symbol name to search if it is used in Layers_structure/Model/Compile
+- Value of an element is the content of the function which is created by a convert function.
 Syntax:
-    - All keys' characters must be in CAPITAL letter
-    - All values must be absolutely the same as the content from the function:
-        ```convert_py_func_to_txt```
+- All keys' characters must be in CAPITAL letter
+- All values must be absolutely the same as the content from the function:
+    ```convert_py_func_to_txt```
