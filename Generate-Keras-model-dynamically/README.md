@@ -17,7 +17,7 @@
 ### Run the code
 Template:
 ```bash
-python main.py --input-config [name/relative path of json config file]
+python main.py --input-config {name/relative path of json config file}
 ```
 Example:
 ```bash
@@ -54,8 +54,6 @@ Syntax:
     - For examples: "a", "w"
 - Function_name: the name of the function which create the required model.
     - For examples: Function name: "MyModel" => result: def MyModel():
-- Comment_mode: a flag to turn on/off writing comments to the creating model function.
-    - For examples: "True"/"Yes", "False"/"No"
 
 ### Parameters
 Information:
@@ -86,30 +84,30 @@ Syntax:
 - The attribute key: "Layer" must be written correctly.
 - Other attributes' keys of one layer must be written the same as the API in Keras.
     - For intance: "filters" key of layer "Conv1D"
-- The template: [VARIABLE_NAME] is used for assigning a value in "variables" part to the attribute value of this part.
+- The template: {VARIABLE_NAME} is used for assigning a value in "variables" or "Additional functions" part to the attribute value of this part.
     - For examples: "Layer": "Con1", "kernel_size": "SIZE_3", ... 
 
 ### Layer connections
 Information:
 - The place includes all connections between layers to form a network
 Syntax:
-- Template for connection: [NAME_CONNECT] = ARRAY OF [LAYER_DEFINITION_KEY_NAME] or [PREVIOUS_DEFINE_CONNECTION]
-- The special case for the input: [NAME_CONNECT] = ARRAY OF [INPUT_LAYER_KEY_NAME]
+- Template for connection: {NAME_CONNECT} = ARRAY OF {LAYER_DEFINITION_KEY_NAME} or {PREVIOUS_DEFINE_CONNECTION}
+- The special case for the input: {NAME_CONNECT} = ARRAY OF {INPUT_LAYER_KEY_NAME}
 
 ### Model
 Information:
 - Contains all input parameters for the model constructor function.
 Syntax:
-- "inputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or an array of [LAYER_DEFINITION_KEY_NAME]
-- "outputs" attribute value can be a [LAYER_DEFINITION_KEY_NAME] or an array of [LAYER_DEFINITION_KEY_NAME]
+- "inputs" attribute value can be a {LAYER_DEFINITION_KEY_NAME} or an array of {LAYER_DEFINITION_KEY_NAME}
+- "outputs" attribute value can be a {LAYER_DEFINITION_KEY_NAME} or an array of {LAYER_DEFINITION_KEY_NAME}
 
 ### Compile
 Information:
 - Contains all input parameters for the model compile function.
 Syntax:
 - Attributes' keys of one layer must be written the same as the API in Keras.
-- Attributes's values can has the template for functions in "functions_definition" part
-    - For examples: "loss": "[VAE_LOSS]", "optimizer": "[MYOPTIMIZE]", ...
+- Attributes's values can be anything as it fits the syntax of the create function
+    - For examples: "loss": "my_loss_func", "optimizer": "my_opt_func", ...
 
 ### Additional functions
 Information:

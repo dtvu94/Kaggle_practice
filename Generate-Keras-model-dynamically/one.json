@@ -1,0 +1,77 @@
+{
+    "Info": {
+        "File_path": "E:\\GitProjects\\Machine_Learning_practice\\Generate-Keras-model-dynamically\\model_one.py",
+        "Write_mode": "w",
+        "Function_name": "lenet5"
+    },
+    "Parameters": {
+    },
+    "Variables": {
+        "img_shape": "(32, 32, 1)"
+    },
+    "Layer definitions": {
+        "Img_Input": {
+            "Layer": "Input",
+            "shape": "{img_shape}"
+        }
+        "conv1": {
+            "Layer": "Conv2D",
+            "filters": "6", 
+            "kernel_size": "5", 
+            "strides": "1", 
+            "activation": "relu"
+        },
+        "conv2": {
+            "Layer": "Conv2D",
+            "filters": "16", 
+            "kernel_size": "5", 
+            "strides": "1", 
+            "activation": "relu"
+        },
+        "MP2D": {
+            "Layer": "MaxPooling2D",
+            "pool_size": "2", 
+            "strides": "2"
+        },
+        "Flatten": {
+            "Layer": "Flatten",
+        },
+        "Dense1": {
+            "Layer": "Dense",
+            "units": "120", 
+            "activation": "relu"
+        },
+        "Dense2": {
+            "Layer": "Dense",
+            "units": "84", 
+            "activation": "relu"
+        },
+        "Dense3": {
+            "Layer": "Dense",
+            "units": "10", 
+            "activation": "softmax"
+        }
+    },
+    "Layer connections": {
+        "x1": ["Img_Input"],
+        "x2": ["x1", "conv1"],
+        "x3": ["x2", "MP2D"],
+        "x4": ["x3", "conv2"],
+        "x5": ["x4", "MP2D"],
+        "x6": ["x5", "Flatten"],
+        "x7": ["x6", "Dense1"],
+        "x8": ["x7", "Dense2"],
+        "x9": ["x8", "Dense3"],
+    },
+    "Model": {
+        "inputs": "Img_Input",
+        "outputs": "x9"
+    },
+    "Compile": {
+        "optimizer": "adam", 
+        "loss": "categorical_crossentropy", 
+        "metrics": "['accuracy']"
+    },
+    "Additional functions": {
+    }
+}
