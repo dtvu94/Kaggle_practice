@@ -47,18 +47,18 @@ Note: This module allows **ASCII** characters only. In case of unicode, you have
 ### Info
 Information:
 - Store information of the creating process
+
 Syntax:
-    a)  File_path: an absolute path of the creating Keras model file.
-    b)  Write_mode: can be append or write mode, intend to combine with 
-    existed sources. 
-        For examples: "a", "w"
-    c)  Function_name: the name of the function which create the 
-    required model.
-        For examples:
-            Function name: "MyModel" => result: def MyModel():
-    d)  Comment_mode: a flag to turn on/off writing comments to the 
-    creating model function.
-        For examples: "True"/"Yes", "False"/"No"
+- File_path: an absolute path of the creating Keras model file.
+- Write_mode: can be append or write mode, intend to combine with 
+existed sources. 
+    - For examples: "a", "w"
+- Function_name: the name of the function which create the 
+required model.
+    - For examples: Function name: "MyModel" => result: def MyModel():
+- Comment_mode: a flag to turn on/off writing comments to the 
+creating model function.
+    - For examples: "True"/"Yes", "False"/"No"
 
 ### Parameters
 Information:
