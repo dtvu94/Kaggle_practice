@@ -61,43 +61,40 @@ Syntax:
 Information:
 - Contains all input parameters for the model function and their descriptions.
 Syntax:
-    - All keys' characters must be in CAPITAL letter.
-        - For examples: "MIN_X", "KERNEL_SIZE_1", "POOL_2_2", ...
-    - All values must be in string type.
-        - For examples: "(2, 2)", "3", "Conv1D", ...
+- All keys' characters must be in CAPITAL letter.
+    - For examples: "MIN_X", "KERNEL_SIZE_1", "POOL_2_2", ...
+- All values must be in string type.
+    - For examples: "(2, 2)", "3", "Conv1D", ...
 
 ### Variables
 Information:
 - Contains all local variables for the model function and their descriptions.
 Syntax:
-    - All keys' characters must be in CAPITAL letter
-        - For examples: "MIN_X", "KERNEL_SIZE_1", "POOL_2_2", ...
-    - All values must be in string type
-        - For examples: "(2, 2)", "3", "Conv1D", ...
+- All keys' characters must be in CAPITAL letter
+    - For examples: "MIN_X", "KERNEL_SIZE_1", "POOL_2_2", ...
+- All values must be in string type
+    - For examples: "(2, 2)", "3", "Conv1D", ...
 
 ### Layer definitions
 Information:
-    - Contains layers' definitions such as Convolution, flatten, ...
-    - Key is the layer exact name.
-    - Value is the layer input parameters
+- Contains layers' definitions such as Convolution, flatten, ...
+- Key is the layer exact name.
+- Value is the layer input parameters
 Syntax:
-    - Layer's key can be anything, depend on your hobbies;
-        - For examples: "1", "2", "conv1", "conv2", "conv3", "conv4", ...
-    - The attribute key: "Layer" must be written correctly.
-    - Other attributes' keys of one layer must be written the same as the API in Keras.
-        - For intance: "filters" key of layer "Conv1D"
-    - The template: [VARIABLE_NAME] is used for assigning a value in "variables" part to the attribute value of this part.
-        - For examples: "Layer": "Con1", "kernel_size": "SIZE_3", ... 
+- Layer's key can be anything, depend on your hobbies;
+    - For examples: "1", "2", "conv1", "conv2", "conv3", "conv4", ...
+- The attribute key: "Layer" must be written correctly.
+- Other attributes' keys of one layer must be written the same as the API in Keras.
+    - For intance: "filters" key of layer "Conv1D"
+- The template: [VARIABLE_NAME] is used for assigning a value in "variables" part to the attribute value of this part.
+    - For examples: "Layer": "Con1", "kernel_size": "SIZE_3", ... 
 
 ### Layer connections
 Information:
-
-    - The place includes all connections between layers to form a network
+- The place includes all connections between layers to form a network
 Syntax:
-    - Template for connection:
-        [NAME_CONNECT] = ARRAY OF [LAYER_DEFINITION_KEY_NAME] or [PREVIOUS_DEFINE_CONNECTION]
-    - The special case for the input:
-        [NAME_CONNECT] = ARRAY OF [INPUT_LAYER_KEY_NAME]
+- Template for connection: [NAME_CONNECT] = ARRAY OF [LAYER_DEFINITION_KEY_NAME] or [PREVIOUS_DEFINE_CONNECTION]
+- The special case for the input: [NAME_CONNECT] = ARRAY OF [INPUT_LAYER_KEY_NAME]
 
 ### Model
 Information:
