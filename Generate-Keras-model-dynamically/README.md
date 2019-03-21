@@ -109,9 +109,7 @@ Information:
 Syntax:
 - Attributes' keys of one layer must be written the same as the API in Keras.
 - Attributes's values can has the template for functions in "functions_definition" part
-    - For examples: 
-        ```bash "loss": "[VAE_LOSS]"```
-        ```bash "optimizer": "[MYOPTIMIZE]", ...```
+    - For examples: "loss": "[VAE_LOSS]", "optimizer": "[MYOPTIMIZE]", ...
 
 ### Additional functions
 Information:
